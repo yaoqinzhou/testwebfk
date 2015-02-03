@@ -8,7 +8,7 @@ var server = http.createServer();
 server.on('request',handle);
 
 function handle(req,res){
-    res.write('test req');
+    res.write('hello world');
     res.end();
 }
 
