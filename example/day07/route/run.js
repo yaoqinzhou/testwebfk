@@ -5,7 +5,8 @@ var fk = require('../index.js'),
     App = fk.App,
     app = new App(),
     static_middle = fk.static,
-    post = fk.post;
+    post = fk.post,
+    fs = require('fs');
 
 app.use(static_middle(__dirname + '../../public'));
 app.use(post);
@@ -23,7 +24,10 @@ app.post('/post',function (req,res){
     }catch(e){
         console.log(e.stack);
     }*/
-
+    fs.writeFile(__dirname + '/public/file.txt',req.files.txt,function(){
+        res.write('upload ok');
+        res.end();
+    });
 
 });
 
