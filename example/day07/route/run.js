@@ -12,18 +12,7 @@ app.use(static_middle(__dirname + '../../public'));
 app.use(post);
 
 app.post('/post',function (req,res){
-   /* try{
-        var title = req.body.title;
-        var content = req.body.content;
 
-        console.log('title = ' + title + ' content = ' + content);
-
-        res.write('title = ' + title + ' content = ' + content);
-        res.end();
-
-    }catch(e){
-        console.log(e.stack);
-    }*/
     fs.writeFile(__dirname + '/public/file.txt',req.files.txt,function(){
         res.write('upload ok');
         res.end();
