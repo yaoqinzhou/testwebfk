@@ -17,8 +17,6 @@ module.exports = function post(req,res,next){
         try{
             var contentType = req.headers['content-type'];
 
-            console.log('contentType = ' + contentType);
-
             var isMulti = /(boundary=)/gi.test(contentType);
 
             if(isMulti){
@@ -38,8 +36,6 @@ module.exports = function post(req,res,next){
 
                     var header = field.substring(0,index);
 
-                    console.log('header = ' + header);
-
                     var fileName = /\"(.*?)\"/g.test(header);
 
                     var fieldName = RegExp.$1;
@@ -48,7 +44,16 @@ module.exports = function post(req,res,next){
 
                     var isFile = /fieldName/g.test(header);
 
-                    console.log('isFile = ' + isFile);
+                    var body = field.substring(index + RN.length);
+                    body = body.substring(0,body.length - RN.length / 2);
+
+                    console.log('body = ' + body);
+
+                    if(isFile){
+                        req.files[fieldName] = new Buffer(body);
+                    }else{
+                        req.body[fieldName] = body;
+                    }
 
                 });
 
