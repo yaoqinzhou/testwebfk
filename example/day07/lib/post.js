@@ -8,7 +8,6 @@ module.exports = function post(req,res,next){
     req.body = {};
 
     req.on("data",function(chunk){
-        console.log(chunk.toString());
         body_data += chunk;
     });
 
@@ -32,26 +31,34 @@ module.exports = function post(req,res,next){
                 var RN = '\r\n';
 
                 fields.forEach(function (field){
+                    console.log('field = ' + field);
+
                     var index = field.indexOf(RN);
 
                     var header = field.substring(0,index);
 
-                    var fileName = /\"(.*?)\"/g.test(header);
+                    /name=\"(.*?)\"/g.test(header);
 
                     var fieldName = RegExp.$1;
 
-                    console.log('fieldName = ' + fieldName);
-
-                    var isFile = /fieldName/g.test(header);
+                    //判断头部字符串中是否有filename字符串，如果有就是文件
+                    var isFile = /filename/g.test(header);
 
                     var body = field.substring(index + RN.length);
-                    body = body.substring(0,body.length - RN.length / 2);
-
-                    console.log('body = ' + body);
 
                     if(isFile){
+                        var index2 = body.indexOf(RN);
+
+                        body = body.substring(index2 + (RN.length * 2),body.length - RN.length / 2);
+
                         req.files[fieldName] = new Buffer(body);
+
+                        /filename=\"(.*?)\"/g.test(header);
+
+                        req.files[fieldName].fileName = RegExp.$1;
                     }else{
+                        body = body.substring(0,body.length - RN.length / 2);
+
                         req.body[fieldName] = body;
                     }
 
