@@ -31,7 +31,6 @@ module.exports = function post(req,res,next){
                 var RN = '\r\n';
 
                 fields.forEach(function (field){
-                    console.log('field = ' + field);
 
                     var index = field.indexOf(RN);
 
