@@ -13,7 +13,7 @@ app.use(post);
 
 app.post('/post',function (req,res){
 
-    fs.writeFile(__dirname + '/public/file.txt',req.files.txt,function(){
+    fs.writeFile(__dirname + '/' + req.files.txt.fileName,req.files.txt,function(){
         res.write('upload ok');
         res.end();
     });
