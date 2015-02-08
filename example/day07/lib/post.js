@@ -31,7 +31,6 @@ module.exports = function post(req,res,next){
                 var RN = '\r\n';
 
                 fields.forEach(function (field){
-
                     var index = field.indexOf(RN);
 
                     var header = field.substring(0,index);
