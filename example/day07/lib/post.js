@@ -20,7 +20,6 @@ module.exports = function post(req,res,next){
 
             if(isMulti){
                 var boundary = RegExp["$'"];
-
                 var boundaryStandard = '--' + boundary + '\r\n';
                 var boundaryEnd = boundaryStandard + '--';
 
