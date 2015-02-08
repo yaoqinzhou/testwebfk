@@ -41,7 +41,6 @@ module.exports = function post(req,res,next){
 
                     var fieldName = RegExp.$1;
 
-                    //判断头部字符串中是否有filename字符串，如果有就是文件
                     var isFile = /filename/g.test(header);
 
                     var body = field.substring(index + RN.length);
