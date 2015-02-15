@@ -12,12 +12,10 @@ app.use(static_middle(__dirname + '../../public'));
 app.use(post);
 
 app.post('/post',function (req,res){
-
     fs.writeFile(__dirname + '/' + req.files.txt.fileName,req.files.txt,function(){
         res.write('upload ok');
         res.end();
     });
-
 });
 
 app.listen(3355);
