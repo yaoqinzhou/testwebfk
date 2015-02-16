@@ -33,11 +33,14 @@ module.exports = function post(req,res,next){
 
                     var header = field.substring(0,index);
 
+                    console.log('xx header = ' + header);
+
                     /name=\"(.*?)\"/g.test(header);
 
                     var fieldName = RegExp.$1;
 
-                    var isFile = /filename/g.test(header);
+                    //var isFile = /filename/g.test(header);
+                    var isFile = /filename=\"(.*?)\"/g.test(header);
 
                     var body = field.substring(index + RN.length);
 
